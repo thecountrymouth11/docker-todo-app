@@ -17,6 +17,6 @@ services:
     networks:
       - todo-network
 
-  networks:
-    todo-network:
-      driver: bridge
+networks:
+  todo-network:
+    driver: bridge
