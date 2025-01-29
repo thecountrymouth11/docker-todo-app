@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
 const app = express();
 app.use(express.json());
 
-mongoose.connect('mongdb://mongo:27017/todo', {
+mongoose.connect('mongodb://mongo:27017/todo', {
 	useNewUrlParser: true,
 	useUnifiedTopology: true
 }).then(() => console.log('Connected to MongoDB'))
@@ -15,10 +15,11 @@ const Todo = mongoose.model('Todo', TodoSchema);
 
 app.get('/', async (req, res) => {
 	const todos = await Todo.find();
+	res.json(todos);
 });
 
 app.post('/add', async (req, res) => {
-	const newTodo = new Todo({ task: req.body.task ));
+	const newTodo = new Todo({ task: req.body.task });
 	await newTodo.save();
 	res.send('Task added');
 });
